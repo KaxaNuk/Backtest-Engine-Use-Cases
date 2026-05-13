@@ -7,6 +7,8 @@ parameter sensitivity studies and multi-portfolio batch processing.
 Each script in `backtest_use_cases/` is self-contained: open it, read the
 comments, run it, inspect the Excel reports it writes to `Output/`.
 
+**Engine documentation:** https://kaxanuk-backtest-engine.readthedocs-hosted.com/en/latest/
+
 ---
 
 ## What's inside
@@ -56,19 +58,26 @@ Backtest-Engine-Use-Cases/
 ## Setup
 
 1. **Clone the repo** and open a shell at its root.
-2. **Install the engine** in your Python environment (refer to the
-   `kaxanuk.backtest_engine` package documentation for installation).
-3. **Create `Config/.env`** with your license key:
+2. **Install the engine** in your Python environment (see the
+   [engine documentation](https://kaxanuk-backtest-engine.readthedocs-hosted.com/en/latest/)
+   for installation instructions).
+3. **Initialize the project scaffolding** — creates `Config/`, `Input/Data/`,
+   `Input/Portfolios/`, `Output/`, and a `__main__.py` entry point in one
+   shot:
+   ```bash
+   kaxanuk.backtest_engine init excel
+   ```
+4. **Create `Config/.env`** with your license key:
    ```
    KNBE_API_KEY_KAXANUK=<your-key-here>
    ```
-4. **Place the Excel configuration** at
+5. **Place the Excel configuration** at
    `Config/backtest_engine_parameters.xlsx`. This file drives the
    Excel-configured examples (`basic_single_backtest.py`,
    `parameter_sensitivity_analysis.py`).
-5. **Drop market-data files** in `Input/Data/` (CSV or Parquet, depending
+6. **Drop market-data files** in `Input/Data/` (CSV or Parquet, depending
    on what your Excel config selects).
-6. **Drop portfolio definition files** in `Input/Portfolios/` (CSV or
+7. **Drop portfolio definition files** in `Input/Portfolios/` (CSV or
    Excel). Required by `batch_directory_scan.py`; optional for the inline
    batch script.
 
@@ -117,16 +126,17 @@ or the Excel config to match your data.
 
 ## Optional: interactive dashboard
 
-If you maintain a local `__main__.py` (gitignored on purpose), you can
-launch the engine's interactive dashboard with:
+The `kaxanuk.backtest_engine init excel` command generates a local
+`__main__.py` (gitignored on purpose) that launches the engine's
+interactive dashboard:
 
 ```bash
 python -m Backtest-Engine-Use-Cases
 ```
 
-This loads `Config/backtest_engine_parameters.xlsx` and serves the
-dashboard on the port configured there. Useful for visually exploring
-results without writing code.
+It loads `Config/backtest_engine_parameters.xlsx` and serves the dashboard
+on the port configured there. Useful for visually exploring results
+without writing code.
 
 ---
 
